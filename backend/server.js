@@ -20,6 +20,7 @@ function formatDate(date) {
   return `${d}/${m}/${y}`;
 }
 
+// Truque do dia 0: pedir o dia 0 do mês seguinte retorna o último dia do mês atual
 function ultimoDiaMes(ano, mes) {
   return new Date(ano, mes + 1, 0).getDate();
 }
@@ -32,6 +33,7 @@ function isSameDay(a, b) {
   return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
 }
 
+// Se o dia do pagamento não existe no mês (ex: dia 31 em fevereiro), usa o último dia disponível
 function dataPagamentoNoMes(diaPagamento, ano, mes) {
   const ultimo = ultimoDiaMes(ano, mes);
   const dia = Math.min(diaPagamento, ultimo);
@@ -53,10 +55,12 @@ function calcular({dataInicial, dataFinal, primeiroPagamento, valorEmprestimo, t
   const taxa = parseFloat(taxaJuros) / 100;
   const diaPagamento = dtPrimeiro.getDate();
 
+  // +1 porque tanto o mês do primeiro pagamento quanto o da data final são incluídos
   const nParcelas = (dtFinal.getFullYear() - dtPrimeiro.getFullYear()) * 12 + (dtFinal.getMonth() - dtPrimeiro.getMonth()) + 1;
 
   const amortizacaoMensal = PV / nParcelas;
 
+  // Map com timestamp como chave garante que datas duplicadas (ex: pagamento que cai no fim de mês) apareçam só uma vez
   const datasSet = new Map();
   const addData = (d) => datasSet.set(d.getTime(), d);
 
@@ -82,6 +86,7 @@ function calcular({dataInicial, dataFinal, primeiroPagamento, valorEmprestimo, t
     let mes = dtPrimeiro.getMonth();
     for (let k = 0; k < nParcelas; k++) {
       const isUltima = k === nParcelas - 1;
+      // A última parcela sempre cai na data final, independente do dia do pagamento
       const dp = isUltima ? new Date(dtFinal) : dataPagamentoNoMes(diaPagamento, ano, mes);
       addData(dp);
       mes++;
@@ -123,6 +128,7 @@ function calcular({dataInicial, dataFinal, primeiroPagamento, valorEmprestimo, t
 
     const dias = i === 0 ? 0 : diasEntre(dtAnterior, dt);
     const saldoDevedorAtual = saldoPrincipal + jurosAcumulado;
+    // Juros compostos sobre o saldo devedor (principal + juros acumulados), base 360 dias — fórmula da planilha
     const jurosPeriodo = i === 0 ? 0 : saldoDevedorAtual * (Math.pow(1 + taxa, dias / BASE_DIAS) - 1);
 
     let consolidada = "",
@@ -158,8 +164,9 @@ function calcular({dataInicial, dataFinal, primeiroPagamento, valorEmprestimo, t
       saldoPrincipal -= amortizacao;
       consolidada = `${numeroParcela}/${nParcelas}`;
       pago = jurosPago;
-      jurosAcumulado = 0;
+      jurosAcumulado = 0; // zera após pagamento — os juros acumulados foram quitados
     } else {
+      // Fim de mês sem pagamento: provisiona os juros mas não quita nada
       jurosAcumulado += jurosPeriodo;
       provisao = jurosPeriodo;
       acumulado = jurosAcumulado;
