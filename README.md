@@ -57,17 +57,19 @@ Abra o arquivo `frontend/index.html` no navegador.
 
 ## Estrutura do projeto
 
+```
 loanCalculator/
 ├── backend/
-│ └── server.js
+│   └── server.js
 ├── frontend/
-│ ├── index.html
-│ ├── css/
-│ │ └── style.css
-│ └── js/
-│ └── app.js
+│   ├── index.html
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       └── app.js
 ├── package.json
 └── README.md
+```
 
 ---
 
