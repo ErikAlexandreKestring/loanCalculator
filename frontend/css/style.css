@@ -1,0 +1,355 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --brand: #1565c0;
+  --brand-dark: #003d7a;
+  --brand-light: #e3edf9;
+  --error: #d93025;
+  --text-primary: #212121;
+  --text-secondary: #5a5a72;
+  --border: #cfd8dc;
+  --bg: #f4f6f8;
+  --surface: #ffffff;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --radius: 8px;
+  --radius-sm: 4px;
+  --font: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 20px 48px;
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.form-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 16px 20px 20px;
+  margin-bottom: 16px;
+}
+
+.form-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  align-items: flex-end;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 140px;
+}
+
+label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+label .req {
+  color: var(--error);
+  margin-left: 2px;
+}
+
+input {
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-family: var(--font);
+  color: var(--text-primary);
+  background: var(--surface);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  width: 100%;
+}
+input:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 2px rgba(21, 101, 192, 0.15);
+}
+input.error {
+  border-color: var(--error);
+}
+
+.field-error {
+  font-size: 11px;
+  color: var(--error);
+  display: none;
+}
+.field-error.show {
+  display: block;
+}
+
+.btn-calcular {
+  height: 36px;
+  padding: 0 24px;
+  background: var(--brand);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.btn-calcular:hover:not(:disabled) {
+  background: var(--brand-dark);
+}
+.btn-calcular:disabled {
+  background: #90a4ae;
+  cursor: not-allowed;
+}
+
+.btn-calcular .spinner {
+  width: 13px;
+  height: 13px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  display: none;
+}
+.btn-calcular.loading .spinner {
+  display: block;
+}
+.btn-calcular.loading .btn-text {
+  display: none;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.alert {
+  margin-top: 10px;
+  padding: 9px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  display: none;
+  align-items: center;
+  gap: 8px;
+}
+.alert.show {
+  display: flex;
+}
+.alert-error {
+  background: #fdeded;
+  border: 1px solid #f5c2c7;
+  color: #842029;
+}
+
+.summary-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.chip {
+  background: var(--brand-light);
+  border: 1px solid #bbcfe8;
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 11px;
+  color: var(--brand-dark);
+  font-weight: 500;
+  display: none;
+}
+.chip.show {
+  display: inline-flex;
+}
+
+.table-card {
+  display: none;
+}
+.table-card.show {
+  display: block;
+}
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  min-width: 860px;
+}
+
+thead tr.row-groups th {
+  padding: 6px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.th-group-empty {
+  background: #eceff1;
+  color: transparent;
+  border-color: var(--border) !important;
+}
+.th-group-parcela {
+  background: #1976d2;
+  color: white;
+}
+.th-group-principal {
+  background: #1e88e5;
+  color: white;
+}
+.th-group-juros {
+  background: #42a5f5;
+  color: white;
+}
+
+thead tr.row-cols th {
+  padding: 7px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: right;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border: 1px solid var(--border);
+}
+
+.tc-data {
+  background: #e8eaf6;
+  color: #283593;
+  text-align: left !important;
+}
+.tc-val-emp {
+  background: #e3edf9;
+  color: #1565c0;
+}
+.tc-saldo-dev {
+  background: #e3edf9;
+  color: #1565c0;
+}
+.tc-consolidada {
+  background: #ddeeff;
+  color: #1565c0;
+  text-align: center !important;
+}
+.tc-total {
+  background: #ddeeff;
+  color: #1565c0;
+}
+.tc-amort {
+  background: #e1f0ff;
+  color: #1565c0;
+}
+.tc-saldo {
+  background: #e1f0ff;
+  color: #1565c0;
+}
+.tc-provisao {
+  background: #e8f4fd;
+  color: #0d47a1;
+}
+.tc-acumulado {
+  background: #e8f4fd;
+  color: #0d47a1;
+}
+.tc-pago {
+  background: #e8f4fd;
+  color: #0d47a1;
+}
+
+tbody tr {
+  border-bottom: 1px solid #eceff1;
+  transition: background 0.08s;
+}
+tbody tr:hover {
+  background: #f1f8ff;
+}
+tbody tr.row-parcela {
+  background: #fafcff;
+}
+tbody tr.row-parcela:hover {
+  background: #e8f0fb;
+}
+
+td {
+  padding: 6px 8px;
+  text-align: right;
+  color: var(--text-primary);
+  white-space: nowrap;
+  border-right: 1px solid #eceff1;
+  font-variant-numeric: tabular-nums;
+}
+td:first-child {
+  text-align: left;
+  font-weight: 500;
+  border-left: 1px solid #eceff1;
+}
+
+.sep-parcela {
+  border-left: 2px solid #bbdefb;
+}
+.sep-principal {
+  border-left: 2px solid #90caf9;
+}
+.sep-juros {
+  border-left: 2px solid #64b5f6;
+}
+
+.badge-parcela {
+  display: inline-block;
+  background: var(--brand);
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 10px;
+}
+.val-zero {
+  color: #bdbdbd;
+}
+
+@media (max-width: 768px) {
+  main {
+    padding: 12px 12px 32px;
+  }
+  .form-body {
+    flex-direction: column;
+  }
+  .field {
+    min-width: 100%;
+  }
+}

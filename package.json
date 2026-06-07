@@ -1,0 +1,12 @@
+{
+  "name": "loan-calculator",
+  "version": "1.0.0",
+  "description": "Calculadora de Empréstimos",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node --watch backend/server.js"
+  },
+  "author": "Erik Alexandre Kestring",
+  "license": "MIT"
+}
