@@ -1,4 +1,4 @@
-# 💰 Loan Calculator
+# Loan Calculator
 
 Calculadora de empréstimos
 
@@ -6,7 +6,7 @@ Permite simular empréstimos com amortização mensal fixa, exibindo uma tabela 
 
 ---
 
-## 🛠 Tecnologias
+## Tecnologias
 
 | Camada   | Tecnologia                     |
 | -------- | ------------------------------ |
@@ -15,7 +15,7 @@ Permite simular empréstimos com amortização mensal fixa, exibindo uma tabela 
 
 ---
 
-## ✨ Funcionalidades
+## Funcionalidades
 
 - Cálculo de amortização mensal fixa (`Valor / nParcelas`)
 - Juros compostos proporcionais por período (base 360 dias)
@@ -26,7 +26,7 @@ Permite simular empréstimos com amortização mensal fixa, exibindo uma tabela 
 
 ---
 
-## 🚀 Como rodar
+## Como rodar
 
 ### Pré-requisitos
 
@@ -55,7 +55,7 @@ Abra o arquivo `frontend/index.html` no navegador.
 
 ---
 
-## 📁 Estrutura do projeto
+## Estrutura do projeto
 
 loanCalculator/
 ├── backend/
@@ -71,7 +71,7 @@ loanCalculator/
 
 ---
 
-## 🧮 Lógica de cálculo
+## Lógica de cálculo
 
 A calculadora segue as fórmulas da planilha `Calculadora_Emprestimos.xlsx` fornecida:
 
@@ -97,7 +97,7 @@ Se o dia do primeiro pagamento não existir no mês seguinte (ex: dia 31 em feve
 
 ---
 
-## 📊 Exemplo
+## Exemplo
 
 Com os dados padrão da planilha:
 
@@ -113,7 +113,7 @@ Com os dados padrão da planilha:
 
 ---
 
-## 👤 Autor
+## Autor
 
 **Erik Alexandre Kestring**
 [LinkedIn](https://www.linkedin.com/in/erik-kestring-280b05267/) · [GitHub](https://github.com/ErikAlexandreKestring)
